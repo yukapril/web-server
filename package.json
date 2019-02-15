@@ -1,0 +1,67 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "A web server with Electron.",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "npx electron-builder build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukapril/web-server.git"
+  },
+  "keywords": [
+    "web",
+    "static",
+    "server"
+  ],
+  "author": {
+    "name": "yukapril",
+    "email": "i@yukapril.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yukapril/web-server/issues"
+  },
+  "homepage": "https://github.com/yukapril/web-server#readme",
+  "devDependencies": {
+    "electron": "^4.0.5"
+  },
+  "dependencies": {
+    "koa": "^2.6.2",
+    "koa-static": "^5.0.0"
+  },
+  "build": {
+    "appId": "com.yukapril.electron.webServer",
+    "productName": "Web Server",
+    "copyright": "Copyright © 2019 ${author}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "www/**/*",
+      "electron/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/www.png",
+      "target": [
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "build/www.png",
+      "target": [
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        "zip",
+        "AppImage"
+      ]
+    }
+  }
+}
