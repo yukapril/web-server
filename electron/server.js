@@ -1,13 +1,20 @@
 const http = require('http')
 const Koa = require('koa')
-const koaStatic = require('koa-static')
+const koaStatic = require('koa-static-with-spa')
 
 let SERVER_LIST = []
 
 const createServer = (options, callback) => {
-  const { path, port } = options
+  const { path, port, headers, spa } = options
   const koaApp = new Koa()
-  koaApp.use(koaStatic(path))
+
+  koaApp.use(koaStatic(path, { defer: true, spa }))
+
+  koaApp.use(async (ctx, next) => {
+    await next()
+    ctx.set(headers)
+  })
+
   let server
 
   server = http.createServer(koaApp.callback()).listen(port)
@@ -32,7 +39,7 @@ const server = (pid, op, options, callback) => {
       if (err) {
         msg = err.errno
         if (err.errno === 'EADDRINUSE') {
-          msg = 'Server (port) is occupied'
+          msg = 'Server (port) is occupied.'
         }
         callback({ pid, op, options, success: false, msg })
         return
@@ -54,7 +61,4 @@ const server = (pid, op, options, callback) => {
   }
 }
 
-module.exports = {
-  createServer,
-  server
-}
+module.exports = { server }
