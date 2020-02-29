@@ -5,7 +5,7 @@
   "main": "electron/main.js",
   "scripts": {
     "start": "electron .",
-    "package": "npx electron-builder build"
+    "package": "electron-builder build --mac --linux --win"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,11 @@
   },
   "homepage": "https://github.com/yukapril/web-server#readme",
   "devDependencies": {
-    "electron": "^4.0.5"
+    "electron": "^7.1.1",
+    "electron-builder": "^22.1.0"
   },
   "dependencies": {
-    "koa": "^2.6.2",
+    "koa": "2.11.0",
     "koa-static-with-spa": "^5.0.0"
   },
   "build": {

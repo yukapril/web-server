@@ -72,7 +72,9 @@ class App extends PureComponent {
 
   handlePathChange = e => {
     if (e.target && e.target.files[0] && e.target.files[0].path) {
-      const curServerPath = e.target.files[0].path
+      console.log(111, e.target, e.target.files[0])
+      const curServerPathFile = e.target.files[0].path
+      const curServerPath = curServerPathFile.slice(0, curServerPathFile.lastIndexOf('/'))
       this.setState({ curServerPath })
       e.target.value = ''
     }
